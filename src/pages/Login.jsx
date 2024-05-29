@@ -1,11 +1,13 @@
-import React from 'react'
+import React from "react";
+import { Outlet } from "react-router-dom";
 
 const Login = () => {
   return (
     <div>
-      En login
+      <h1>Nav</h1>
+      <Outlet />
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
