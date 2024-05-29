@@ -5,7 +5,7 @@ import logo from "../assets/logo-icon.png";
 const Layout = () => {
   const location = useLocation();
   return (
-    <div className="min-h-screen flex flex-col sticky">
+    <div className="min-h-screen flex flex-col md:sticky">
       <nav className=" bg-gray-100 text-black flex items-center py-4 px-60 sticky top-0 left-0 w-full z-10">
         <div className="flex items-center">
           <Link to="/" className= {`hover:text-green-200 transition-all ${location.pathname === '/' ? 'relative text-green-500' : ''}`}>
@@ -38,7 +38,7 @@ const Layout = () => {
           </div>
       </nav>
       
-      <main className="flex-grow px-60 mt-12">
+      <main className="flex-grow md:px-60 mt-12">
         <Outlet />
       </main>
     </div>

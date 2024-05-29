@@ -13,8 +13,8 @@ const Payment = () => {
 
   return (
     <div>
-      <div className=" w-full flex justify-between">
-        <div className=" w-1/2">
+      <div className=" w-full flex justify-between flex-col md:flex-row align-middle overflow-hidden">
+        <div className=" md:w-1/2">
           <h1 className=" text-4xl font-bold text-green-500 mb-16">Payment</h1>
 
           <form onSubmit={handleSubmit} className=" w-full">
@@ -73,7 +73,7 @@ const Payment = () => {
             </div>
           </form>
         </div>
-        <div className=" w-1/3">
+        <div className=" md:w-1/3">
           <div className=" bg-white shadow-lg rounded-lg h-full p-8">
             <h1 className="text-gray-500">
               Resumen de la compra
