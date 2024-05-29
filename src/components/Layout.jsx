@@ -12,7 +12,7 @@ const Layout = () => {
         <div className="flex space-x-4">
           <Link to="/home" className="hover:text-gray-400">Home</Link>
           <Link to="/register" className="hover:text-gray-400">Sign Up</Link>
-          <Link to="/login" className="hover:text-gray-400">Login</Link>
+          <Link to="/" className="hover:text-gray-400">Login</Link>
           <Link to="/home/cart" className="hover:text-gray-400">Cart</Link>
         </div>
       </nav>
