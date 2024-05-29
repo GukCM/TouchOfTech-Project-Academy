@@ -74,7 +74,7 @@ const Payment = () => {
           </form>
         </div>
         <div className=" md:w-1/3">
-          <div className=" bg-white shadow-lg rounded-lg h-full p-8">
+          <div className=" bg-white shadow-lg rounded-lg h-full p-8 ">
             <h1 className="text-gray-500">
               Resumen de la compra
             </h1>
