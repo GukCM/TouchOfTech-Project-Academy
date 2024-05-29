@@ -3,7 +3,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Layout from "./components/Layout";
-import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import Payment from "./pages/Payment";
 import Products from "./pages/Products";
@@ -29,7 +28,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />,
+        element: <HomePage />,
         errorElement: <ErrorPage />,
       },
       {
@@ -43,12 +42,12 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
       },
       {
-        path: "products",
+        path: ":categories",
         element: <Products />,
         errorElement: <ErrorPage />,
       },
       {
-        path: "products/:product",
+        path: "categories/:product",
         element: <Product />,
         errorElement: <ErrorPage />,
       },
