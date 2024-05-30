@@ -36,11 +36,6 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
       },
       {
-        path: "cart/payment",
-        element: <Payment />,
-        errorElement: <ErrorPage />,
-      },
-      {
         path: "products",
         element: <Products />,
         errorElement: <ErrorPage />,
@@ -51,6 +46,11 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
       },
     ],
+  },
+  {
+    path: "cart/payment",
+    element: <Payment />,
+    errorElement: <ErrorPage />,
   },
 ]);
 
