@@ -1,5 +1,6 @@
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ProductsContextProvider } from "./context/productsContext";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Layout from "./components/Layout";
@@ -8,7 +9,7 @@ import Payment from "./pages/Payment";
 import Products from "./pages/Products";
 import Product from "./pages/Product";
 import ErrorPage from "./components/ErrorPage";
-import HomePage from "./pages/HomePage";
+import Home from "./pages/Home";
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -33,7 +34,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <HomePage />,
+        element: <Home />,
         errorElement: <ErrorPage />,
       },
       {
@@ -61,5 +62,7 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <RouterProvider router={router} />
+  <ProductsContextProvider>
+    <RouterProvider router={router} />
+  </ProductsContextProvider>
 );

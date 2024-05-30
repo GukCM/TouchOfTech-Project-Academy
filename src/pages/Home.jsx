@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { getProducts } from "../services/apiProducts";
+import { Link } from "react-router-dom";
+import { useProductsContext } from "../hooks/useProductsContext";
 
-function HomePage() {
-  const [products, setProducts] = useState([]);
+function Home() {
+  const { products, setProducts } = useProductsContext();
   let categoryTitle = "";
 
   useEffect(() => {
@@ -31,9 +33,10 @@ function HomePage() {
             categoryTitle = product.title;
 
             return (
-              <div
+              <Link
                 key={product.item_id}
-                className="text-center flex flex-col h-80 bg-white hover:bg-blue-700"
+                to={`/${product.title}`}
+                className="text-center flex flex-col h-80 bg-white hover:bg-green-300"
               >
                 <div className="w-full h-72 overflow-hidden">
                   <img
@@ -45,7 +48,7 @@ function HomePage() {
                 <h2 className="text-2xl font-bold text-gray-600">
                   {product.title}
                 </h2>
-              </div>
+              </Link>
             );
           }
         })}
@@ -54,4 +57,4 @@ function HomePage() {
   );
 }
 
-export default HomePage;
+export default Home;
