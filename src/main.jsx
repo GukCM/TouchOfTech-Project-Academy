@@ -13,7 +13,12 @@ import "./index.css";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/error",
+    element: <ErrorPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/login",
     element: <Login />,
     errorElement: <ErrorPage />,
   },
@@ -23,7 +28,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "/home",
+    path: "/",
     element: <Layout />,
     children: [
       {
@@ -37,11 +42,6 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
       },
       {
-        path: "cart/payment",
-        element: <Payment />,
-        errorElement: <ErrorPage />,
-      },
-      {
         path: ":categories",
         element: <Products />,
         errorElement: <ErrorPage />,
@@ -52,6 +52,11 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
       },
     ],
+  },
+  {
+    path: "cart/payment",
+    element: <Payment />,
+    errorElement: <ErrorPage />,
   },
 ]);
 

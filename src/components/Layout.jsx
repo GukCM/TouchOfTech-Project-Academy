@@ -1,23 +1,44 @@
 import React from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link,useLocation } from "react-router-dom";
 import logo from "../assets/logo-icon.png";
 
 const Layout = () => {
+  const location = useLocation();
   return (
-    <div className="min-h-screen flex flex-col">
-      <nav className="bg-gray-800 text-white flex items-center justify-between p-4">
+    <div className="min-h-screen flex flex-col md:sticky">
+      <nav className=" bg-gray-100 text-black flex items-center py-4 px-60 sticky top-0 left-0 w-full z-10">
         <div className="flex items-center">
-          <img src={logo} alt="Logo" className="h-10 mr-4" />
+          <Link to="/" className= {`hover:text-green-200 transition-all ${location.pathname === '/' ? 'relative text-green-500' : ''}`}>
+            <img src={logo} alt="Logo" className="h-10 mr-4" />
+          </Link>
         </div>
-        <div className="flex space-x-4">
-          <Link to="/home" className="hover:text-gray-400">Home</Link>
-          <Link to="/register" className="hover:text-gray-400">Sign Up</Link>
-          <Link to="/" className="hover:text-gray-400">Login</Link>
-          <Link to="/home/cart" className="hover:text-gray-400">Cart</Link>
-        </div>
+          <div className="flex space-x-10 w-full justify-center">
+            <Link to="/" className= {`hover:text-green-200 transition-all font-semibold ${location.pathname === '/' ? 'relative text-green-500' : ''}`}>
+              Home
+              {location.pathname === "/" && (
+                <span className="absolute h-0.5 bg-green-500 bottom-0 left-0 w-full"></span>
+              )} 
+            </Link>
+            
+            <Link to="/register" className="hover:text-green-200 transition-all font-semibold">Sign Up</Link>
+            <Link to="/login" className="hover:text-green-200 transition-all font-semibold">Login</Link>
+            <Link to="/cart" className={`hover:text-green-200 transition-all font-semibold ${location.pathname === '/cart' ? 'relative text-green-500' : ''}`}>
+              Cart
+              {location.pathname === "/cart" && (
+                <span className="absolute h-0.5 bg-green-500 bottom-0 left-0 w-full"></span>
+              )} 
+            </Link>
+
+            <Link to= "/products" className={`hover:text-green-200 transition-all font-semibold ${location.pathname === '/products' ? 'relative text-green-500' : ''}`}>
+              Products
+              {location.pathname === "/products" && (
+                <span className="absolute h-0.5 bg-green-500 bottom-0 left-0 w-full"></span>
+              )} 
+            </Link>
+          </div>
       </nav>
       
-      <main className="flex-grow">
+      <main className="flex-grow md:px-60 mt-12">
         <Outlet />
       </main>
     </div>
