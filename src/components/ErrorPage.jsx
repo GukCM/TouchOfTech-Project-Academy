@@ -1,10 +1,16 @@
 import React from 'react';
-import logo from '../assets/logo-icon.png'; // Asegúrate de reemplazar esto con la ruta correcta a tu logo
+import logo from '../assets/logo-icon.png'; 
+import { useRouteError, useNavigate } from "react-router-dom";
 
-function Error() {
+function ErrorPage() {
+  const navigate = useNavigate();
+  const error = useRouteError();
+
   const goBackHome = () => {
-    window.location.href = '/';
-  };
+    navigate('/');
+  }
+
+  console.log(error);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-4">
@@ -12,9 +18,8 @@ function Error() {
         <img src={logo} alt="Logo" className="h-24 w-auto" />
       </div>
       <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-md text-center">
-        <h1 className="text-6xl font-extrabold text-gray-900">404</h1>
-        <p className="mt-4 text-xl text-gray-600">Page not found</p>
-        <p className="mt-2 text-gray-500">Sorry, we couldn't find the page you're looking for.</p>
+        <h1 className="text-6xl font-extrabold text-gray-900">There is an error</h1>
+        <p className=' font-bold mt-8 text-red-500'>An unexpected error occurred</p>
         <div className="mt-6">
           <button
             onClick={goBackHome}
@@ -28,4 +33,4 @@ function Error() {
   );
 }
 
-export default Error;
+export default ErrorPage;
