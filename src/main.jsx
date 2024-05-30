@@ -12,11 +12,6 @@ import ErrorPage from "./components/ErrorPage";
 
 const router = createBrowserRouter([
   {
-    path: "/error",
-    element: <ErrorPage />,
-    errorElement: <ErrorPage />,
-  },
-  {
     path: "/login",
     element: <Login />,
     errorElement: <ErrorPage />,
@@ -56,6 +51,10 @@ const router = createBrowserRouter([
     path: "cart/payment",
     element: <Payment />,
     errorElement: <ErrorPage />,
+  },
+  {
+    path: "*",
+    element: <ErrorPage />,
   },
 ]);
 
