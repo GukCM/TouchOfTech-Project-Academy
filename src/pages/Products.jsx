@@ -14,8 +14,6 @@ const Products = () => {
     }
   }, []);
 
-  console.log(products);
-
   return (
     <div className="w-full">
       <h1 className="text-5xl text-center font-extrabold mt-6 mb-40">
