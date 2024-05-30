@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getProducts } from "../services/apiProducts";
 import { Link } from "react-router-dom";
 import { useProductsContext } from "../hooks/useProductsContext";
 
 function Home() {
-  const { products, setProducts } = useProductsContext();
+  const { products, handleChangeProducts } = useProductsContext();
   let categoryTitle = "";
 
   useEffect(() => {
     getProducts().then((data) => {
-      setProducts(data);
+      handleChangeProducts(data);
     });
   }, []);
 
