@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useProductsContext } from "../hooks/useProductsContext";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
+const CATEGORIES = ["Hats", "Sneakers", "Jackets", "Womens", "Mens"];
+
 const Products = () => {
   const { categories } = useParams();
   const { products } = useProductsContext();
@@ -10,6 +12,10 @@ const Products = () => {
 
   useEffect(() => {
     if (products.length === 0) {
+      navigate("/");
+    }
+
+    if (!CATEGORIES.includes(categories)) {
       navigate("/");
     }
   }, []);
