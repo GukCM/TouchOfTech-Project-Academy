@@ -1,25 +1,25 @@
 // components/Login.js
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import logo from '../assets/logo-icon.png'; // Asegúrate de reemplazar esto con la ruta correcta a tu logo
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import logo from "../assets/logo-icon.png"; // Asegúrate de reemplazar esto con la ruta correcta a tu logo
 
 function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Obtener los datos del usuario de localStorage
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem("user"));
     // Verificar las credenciales
     if (user && user.email === email && user.password === password) {
       // Redirigir a /home si las credenciales son correctas
-      navigate('/');
+      navigate("/");
     } else {
       // Mostrar un mensaje de error si las credenciales son incorrectas
-      setError('Invalid credentials');
+      setError("Invalid credentials");
     }
   };
 
@@ -35,7 +35,9 @@ function Login() {
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
-              <label htmlFor="email-address" className="sr-only">Email address</label>
+              <label htmlFor="email-address" className="sr-only">
+                Email address
+              </label>
               <input
                 id="email-address"
                 name="email"
@@ -49,7 +51,9 @@ function Login() {
               />
             </div>
             <div>
-              <label htmlFor="password" className="sr-only">Password</label>
+              <label htmlFor="password" className="sr-only">
+                Password
+              </label>
               <input
                 id="password"
                 name="password"
@@ -74,12 +78,18 @@ function Login() {
                 type="checkbox"
                 className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded"
               />
-              <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
+              <label
+                htmlFor="remember-me"
+                className="ml-2 block text-sm text-gray-900"
+              >
                 Remember me
               </label>
             </div>
             <div className="text-sm">
-              <a href="#" className="font-medium text-green-600 hover:text-green-500">
+              <a
+                href="#"
+                className="font-medium text-green-600 hover:text-green-500"
+              >
                 Forgot your password?
               </a>
             </div>
