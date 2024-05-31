@@ -6,7 +6,7 @@ const Layout = () => {
   const location = useLocation();
   return (
     <div className="min-h-screen flex flex-col md:sticky">
-      <nav className=" bg-gray-100 text-black flex items-center py-4 px-60 sticky top-0 left-0 w-full z-10">
+      <nav className="bg-gray-100 text-black flex items-center py-4 px-4 md:px-8 lg:px-16 sticky top-0 left-0 w-full z-10">
         <div className="flex items-center">
           <Link
             to="/"
@@ -17,7 +17,7 @@ const Layout = () => {
             <img src={logo} alt="Logo" className="h-10 mr-4" />
           </Link>
         </div>
-        <div className="flex space-x-10 w-full justify-center">
+        <div className="flex space-x-4 md:space-x-8 lg:space-x-12 w-full justify-center">
           <Link
             to="/"
             className={`hover:text-green-200 transition-all font-semibold ${
@@ -68,7 +68,7 @@ const Layout = () => {
         </div>
       </nav>
 
-      <main className="flex-grow md:px-60 mt-12">
+      <main className="flex-grow md:px-4 lg:px-16 mt-12">
         <Outlet />
       </main>
     </div>
@@ -76,3 +76,5 @@ const Layout = () => {
 };
 
 export default Layout;
+
+
