@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useProductsContext } from "../hooks/useProductsContext";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
+const CATEGORIES = ["Hats", "Sneakers", "Jackets", "Womens", "Mens"];
+
 const Products = () => {
   const { categories } = useParams();
   const { products } = useProductsContext();
@@ -10,6 +12,10 @@ const Products = () => {
 
   useEffect(() => {
     if (products.length === 0) {
+      navigate("/");
+    }
+
+    if (!CATEGORIES.includes(categories)) {
       navigate("/");
     }
   }, []);
@@ -29,6 +35,7 @@ const Products = () => {
                 to={`/categories/${product.item_id}`}
                 className="text-center flex flex-col h-80 bg-white hover:bg-green-300"
               >
+                {/* Convert this div into a component */}
                 <div className="w-full h-72 overflow-hidden">
                   <img
                     src={product.imageUrl}
