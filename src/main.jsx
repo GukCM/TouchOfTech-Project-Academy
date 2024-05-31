@@ -1,14 +1,16 @@
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ProductsContextProvider } from "./context/productsContext";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Layout from "./components/Layout";
-import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import Payment from "./pages/Payment";
 import Products from "./pages/Products";
 import Product from "./pages/Product";
 import ErrorPage from "./components/ErrorPage";
+import Home from "./pages/Home";
+import "./index.css";
 
 const router = createBrowserRouter([
   {
@@ -41,12 +43,12 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
       },
       {
-        path: "products",
+        path: ":categories",
         element: <Products />,
         errorElement: <ErrorPage />,
       },
       {
-        path: "products/:product",
+        path: "categories/:product",
         element: <Product />,
         errorElement: <ErrorPage />,
       },
@@ -60,5 +62,7 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <RouterProvider router={router} />
+  <ProductsContextProvider>
+    <RouterProvider router={router} />
+  </ProductsContextProvider>
 );
