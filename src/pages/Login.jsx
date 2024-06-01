@@ -1,6 +1,8 @@
 // components/Login.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import login from "../services/apiLogin";
+import { capitalizeFirstLetter } from "../helpers/capitalizeFirstLetter";
 import logo from "../assets/logo-icon.png"; // Asegúrate de reemplazar esto con la ruta correcta a tu logo
 
 function Login() {
@@ -9,18 +11,28 @@ function Login() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  localStorage.setItem("user", JSON.stringify({ email, password }));
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Obtener los datos del usuario de localStorage
     const user = JSON.parse(localStorage.getItem("user"));
     // Verificar las credenciales
-    if (user && user.email === email && user.password === password) {
-      // Redirigir a /home si las credenciales son correctas
-      navigate("/");
-    } else {
-      // Mostrar un mensaje de error si las credenciales son incorrectas
+    if (user && user.email == "" && user.password == "") {
       setError("Invalid credentials");
+      return;
     }
+
+    const res = await login(user.email, user.password);
+
+    if (!res.success) {
+      setError(capitalizeFirstLetter(res.message));
+      return;
+    }
+
+    localStorage.setItem("token", res.data.token);
+
+    navigate("/");
   };
 
   return (
