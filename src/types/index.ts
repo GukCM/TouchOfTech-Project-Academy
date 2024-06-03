@@ -1,17 +1,11 @@
 export interface Product {
-  id: number;
-  title: string;
+  item_id: number;
+  col_id: number;
+  name: string;
   price: number;
-  description: string;
-  category: string;
-  image: string;
-  rating: Rating;
+  title: string;
+  imageUrl: string;
   quantity: number;
-}
-
-interface Rating {
-  rate: number;
-  count: number;
 }
 
 export interface CartState {

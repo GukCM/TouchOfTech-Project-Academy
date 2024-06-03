@@ -15,20 +15,27 @@ export const cartSlice = createSlice({
       // state es el estado actual del slice
       // action (el segundo argumento) es el payload que se pasa al reducer, en este caso, el producto que se quiere agregar al carrito
 
-      const findProductIndex = state.items.findIndex((product:Product) => product.id === payload.id);
+      if (state.items.length === 0) {
+        state.items = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart') as string) : state.items;
+      }
+
+      const findProductIndex = state.items.findIndex((product:Product) => product.item_id === payload.item_id);
 
       // if findProductIndex is -1, it means that the product is not in the cart
       if (findProductIndex < 0) {
         state.items.push({...payload, quantity: 1});
-        return;
       } else {
         state.items[findProductIndex] = {...state.items[findProductIndex], quantity: state.items[findProductIndex].quantity + 1};
-        return;
       }
+
+      localStorage.setItem('cart', JSON.stringify(state.items));
     },
     decreaseToCart: (state, {payload}) => {
-      const findProductIndex = state.items.findIndex((product:Product) => product.id === payload);
-      console.log("findProductIndex");
+      if (state.items.length === 0) {
+        state.items = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart') as string) : state.items;
+      }
+
+      const findProductIndex = state.items.findIndex((product:Product) => product.item_id === payload);
 
       if (findProductIndex !== -1) {
         if (state.items[findProductIndex].quantity === 1) {
@@ -38,6 +45,8 @@ export const cartSlice = createSlice({
           state.items[findProductIndex] = {...state.items[findProductIndex], quantity: state.items[findProductIndex].quantity - 1};
         }
       }
+
+      localStorage.setItem('cart', JSON.stringify(state.items));
     },
   },
 })

@@ -1,16 +1,19 @@
 import { useEffect } from "react";
 import { useProductsContext } from "../hooks/useProductsContext";
 import { useNavigate, useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart, decreaseToCart } from "../redux//slices/cartSlice";
 
 const Product = () => {
   const { product } = useParams();
   const { products } = useProductsContext();
+  const { items } = useSelector((state) => state.cart);
+  const cartLocal = JSON.parse(localStorage.getItem("cart")) || [];
+  const dispatch = useDispatch();
 
   const actualProduct = products.find(
     (item) => item.item_id === parseInt(product)
-  );
-
-  console.log(actualProduct);
+  ) || { name: "", price: "", imageUrl: "" };
 
   const navigate = useNavigate();
 
@@ -19,6 +22,19 @@ const Product = () => {
       navigate("/");
     }
   }, []);
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(actualProduct));
+  };
+
+  const handleDecreaseToCart = () => {
+    dispatch(decreaseToCart(actualProduct.item_id));
+  };
+
+  const cartItem =
+    items.lenght > 0
+      ? items.find((item) => item.item_id === actualProduct.item_id)
+      : cartLocal.find((item) => item.item_id === actualProduct.item_id);
 
   return (
     <div className="flex mt-20 flex-col 2xl:flex-row">
@@ -44,11 +60,19 @@ const Product = () => {
           consectetur adipisicing elit.
         </p>
         <div className="flex w-1/4 items-center">
-          <button className="w-1/4 flex justify-center items-center border-slate-400 border-2 rounded-full">
+          <button
+            className="w-1/4 flex justify-center items-center border-slate-400 border-2 rounded-full"
+            onClick={handleDecreaseToCart}
+          >
             -
           </button>
-          <p className="w-2/4 text-center">5</p>
-          <button className="w-1/4 flex justify-center items-center border-slate-400 border-2 rounded-full">
+          <p className="w-2/4 text-center">
+            {cartItem ? cartItem.quantity : "0"}
+          </p>
+          <button
+            className="w-1/4 flex justify-center items-center border-slate-400 border-2 rounded-full"
+            onClick={handleAddToCart}
+          >
             +
           </button>
         </div>
