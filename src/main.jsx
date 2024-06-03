@@ -1,6 +1,8 @@
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ProductsContextProvider } from "./context/productsContext";
+import { store } from "./redux/store";
+import { Provider } from "react-redux";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Layout from "./components/Layout";
@@ -61,7 +63,9 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <ProductsContextProvider>
-    <RouterProvider router={router} />
-  </ProductsContextProvider>
+  <Provider store={store}>
+    <ProductsContextProvider>
+      <RouterProvider router={router} />
+    </ProductsContextProvider>
+  </Provider>
 );
