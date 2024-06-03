@@ -1,24 +1,45 @@
 // components/Register.js
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import logo from '../assets/logo-icon.png'; // Asegúrate de reemplazar esto con la ruta correcta a tu logo
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import register from "../services/apiReg";
+import { capitalizeFirstLetter } from "../helpers/capitalizeFirstLetter";
+import logo from "../assets/logo-icon.png"; // Asegúrate de reemplazar esto con la ruta correcta a tu logo
 
 function Register() {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Guardar los datos del usuario en localStorage
     const user = { firstName, lastName, email, phoneNumber, password };
-    localStorage.setItem('user', JSON.stringify(user));
-    // Redirigir al login
-    navigate('/login');
+
+    if (
+      firstName === "" ||
+      lastName === "" ||
+      email === "" ||
+      phoneNumber === "" ||
+      password === ""
+    ) {
+      setError("Please fill in all fields");
+      return;
+    }
+
+    const res = await register(firstName, email, password);
+
+    if (!res.success) {
+      setError(capitalizeFirstLetter(res.message));
+      return;
+    }
+
+    localStorage.setItem("token", res.data.token);
+
+    navigate("/");
   };
 
   return (
@@ -33,7 +54,9 @@ function Register() {
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
-              <label htmlFor="first-name" className="sr-only">First Name</label>
+              <label htmlFor="first-name" className="sr-only">
+                First Name
+              </label>
               <input
                 id="first-name"
                 name="firstName"
@@ -46,7 +69,9 @@ function Register() {
               />
             </div>
             <div>
-              <label htmlFor="last-name" className="sr-only">Last Name</label>
+              <label htmlFor="last-name" className="sr-only">
+                Last Name
+              </label>
               <input
                 id="last-name"
                 name="lastName"
@@ -59,7 +84,9 @@ function Register() {
               />
             </div>
             <div>
-              <label htmlFor="email-address" className="sr-only">Email address</label>
+              <label htmlFor="email-address" className="sr-only">
+                Email address
+              </label>
               <input
                 id="email-address"
                 name="email"
@@ -73,7 +100,9 @@ function Register() {
               />
             </div>
             <div>
-              <label htmlFor="phone-number" className="sr-only">Phone Number</label>
+              <label htmlFor="phone-number" className="sr-only">
+                Phone Number
+              </label>
               <input
                 id="phone-number"
                 name="phoneNumber"
@@ -86,7 +115,9 @@ function Register() {
               />
             </div>
             <div>
-              <label htmlFor="password" className="sr-only">Password</label>
+              <label htmlFor="password" className="sr-only">
+                Password
+              </label>
               <input
                 id="password"
                 name="password"
