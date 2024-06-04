@@ -10,5 +10,6 @@ export const useProductsContext = () => {
     );
   }
 
+  
   return context;
 };
