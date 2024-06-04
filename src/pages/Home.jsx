@@ -3,6 +3,7 @@ import { getProducts } from "../services/apiProducts";
 import { Link } from "react-router-dom";
 import { useProductsContext } from "../hooks/useProductsContext";
 import React from "react";
+import homelandimg from "../assets/homelandimg.jpg";
 
 function Home() {
   const { products, handleChangeProducts } = useProductsContext();
@@ -19,9 +20,9 @@ function Home() {
     <div className="w-full">
       <section className="w-full">
         <img
-          src={products.length > 0 ? products[1].imageUrl : ""}
+          src={homelandimg}
           alt=""
-          className="w-full h-48 object-cover"
+          className="w-full h-60 object-cover"
         />
         <h1 className="text-center text-3xl mt-5 mb-10 font-semibold">
           Welcome to the Store!
